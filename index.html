@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DDR-Apps | Practical Mobile Utilities</title>
+  <meta name="description" content="DDR-Apps builds practical mobile utilities with clean interfaces, faster workflows, and dependable user experiences for everyday tasks." />
+  <meta name="google-site-verification" content="gRnszzcDTpshXLty2BGaID97wb2QW2SAo3EJA7GMVzE" />
+  <meta name="theme-color" content="#eef2f5" />
+  <meta property="og:title" content="DDR-Apps | Practical Mobile Utilities" />
+  <meta property="og:description" content="Practical mobile utilities built to make everyday tasks easier, faster, and clearer." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.8rem, 1rem + 5vw, 5.6rem);
+      --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+      --color-bg: #eef2f5;
+      --color-surface: #f8fbfd;
+      --color-surface-2: #e3e9ef;
+      --color-surface-offset: #d5dee6;
+      --color-border: #c3ced8;
+      --color-text: #132027;
+      --color-text-muted: #50616a;
+      --color-text-faint: #7b8a94;
+      --color-primary: #0d7c7d;
+      --color-primary-hover: #0a5f60;
+      --color-primary-highlight: #d9eff0;
+      --radius-sm: .4rem; --radius-md: .7rem; --radius-lg: 1rem; --radius-xl: 1.5rem; --radius-full: 9999px;
+      --shadow-sm: 0 2px 10px rgba(14, 24, 31, 0.06);
+      --shadow-md: 0 14px 34px rgba(14, 24, 31, 0.08);
+      --shadow-lg: 0 24px 60px rgba(14, 24, 31, 0.12);
+      --font-display: 'Manrope', 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    [data-theme="dark"] {
+      --color-bg: #141a1f;
+      --color-surface: #1a232a;
+      --color-surface-2: #243039;
+      --color-surface-offset: #2f3c46;
+      --color-border: #42505c;
+      --color-text: #edf3f5;
+      --color-text-muted: #bcc8cd;
+      --color-text-faint: #8c9aa3;
+      --color-primary: #63bbba;
+      --color-primary-hover: #82d0cf;
+      --color-primary-highlight: #1e3135;
+      --shadow-sm: 0 2px 10px rgba(0,0,0,.22);
+      --shadow-md: 0 14px 34px rgba(0,0,0,.35);
+      --shadow-lg: 0 24px 60px rgba(0,0,0,.45);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:none;text-size-adjust:none;scroll-padding-top:5rem}
+    body{min-height:100vh;font-family:var(--font-body);font-size:var(--text-base);line-height:1.65;background:
+      radial-gradient(circle at top left, rgba(255,255,255,.65), transparent 26%),
+      linear-gradient(180deg, rgba(255,255,255,.45), transparent 18%),
+      var(--color-bg);color:var(--color-text);-webkit-font-smoothing:antialiased}
+    img,svg{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+    h1,h2,h3{font-family:var(--font-display);line-height:1.04;letter-spacing:-.035em}
+    p{max-width:70ch;color:var(--color-text-muted)}
+    :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+    .skip-link{position:absolute;left:var(--space-4);top:-3rem;background:var(--color-surface);padding:var(--space-3) var(--space-4);border-radius:var(--radius-full);z-index:100}
+    .skip-link:focus{top:var(--space-4)}
+    .container{width:min(1180px, calc(100% - 2rem));margin:0 auto}
+    .site-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--color-bg) 78%, white 8%);backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb, var(--color-text) 10%, transparent)}
+    .nav-row{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:78px}
+    .brand{display:flex;align-items:center;gap:var(--space-3)}
+    .brand-mark{width:46px;height:46px;padding:8px;border-radius:15px;background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.25)), linear-gradient(135deg, var(--color-primary-highlight), var(--color-surface));border:1px solid color-mix(in srgb, var(--color-primary) 18%, var(--color-border));box-shadow:var(--shadow-sm)}
+    .brand-copy strong{display:block;font-size:var(--text-sm);letter-spacing:.08em;text-transform:uppercase}
+    .brand-copy span{display:block;font-size:var(--text-xs);color:var(--color-text-muted)}
+    .nav-links{display:flex;align-items:center;gap:var(--space-5);list-style:none}
+    .nav-links a{font-size:var(--text-sm);color:var(--color-text-muted)}
+    .nav-links a:hover{color:var(--color-text)}
+    .nav-actions{display:flex;align-items:center;gap:var(--space-3)}
+    .theme-toggle{min-width:44px;min-height:44px;display:grid;place-items:center;border:1px solid color-mix(in srgb, var(--color-text) 12%, transparent);border-radius:var(--radius-full);background:color-mix(in srgb, var(--color-surface) 88%, white 12%)}
+    .header-cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 var(--space-4);border-radius:var(--radius-full);background:var(--color-primary);color:#fff;font-size:var(--text-sm);font-weight:700;box-shadow:var(--shadow-sm)}
+    .header-cta:hover{background:var(--color-primary-hover)}
+    .hero{padding:clamp(var(--space-16), 11vw, 8rem) 0 var(--space-12)}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:var(--space-10);align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:var(--space-2);padding:.45rem .9rem;border-radius:var(--radius-full);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .hero h1{font-size:var(--text-3xl);max-width:10ch;margin-top:var(--space-5)}
+    .hero p{margin-top:var(--space-5);font-size:var(--text-lg);max-width:58ch}
+    .actions{display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 var(--space-5);border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:700;transition:.18s ease background,.18s ease color,.18s ease border-color,.18s ease transform}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--color-primary);color:#fff;box-shadow:var(--shadow-md)}
+    .btn-primary:hover{background:var(--color-primary-hover)}
+    .btn-secondary{background:color-mix(in srgb, var(--color-surface) 80%, white 20%);border:1px solid color-mix(in srgb, var(--color-text) 12%, transparent)}
+    .hero-panel{position:relative;background:linear-gradient(180deg, rgba(255,255,255,.42), transparent 22%), linear-gradient(180deg, var(--color-surface), var(--color-surface-2));border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);border-radius:calc(var(--radius-xl) + .2rem);padding:var(--space-8);box-shadow:var(--shadow-lg);overflow:hidden}
+    .hero-panel::after{content:"";position:absolute;inset:auto -10% -35% auto;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 70%);pointer-events:none}
+    .signal{padding-bottom:var(--space-5);margin-bottom:var(--space-5);border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)}
+    .signal:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+    .signal h3{font-size:var(--text-lg);margin-bottom:var(--space-2)}
+    .signal p{font-size:var(--text-sm)}
+    .section{padding:clamp(var(--space-12), 8vw, var(--space-24)) 0}
+    .section-head{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:var(--space-8);align-items:end;margin-bottom:var(--space-8)}
+    .section-head h2{font-size:var(--text-2xl);max-width:12ch;margin-top:var(--space-4)}
+    .card-grid-2,.card-grid-3,.process-grid,.contact-grid,.principle-grid,.trust-grid{display:grid;gap:var(--space-5)}
+    .card-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card-grid-3,.trust-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .process-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .contact-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+    .principle-grid{grid-template-columns:minmax(0,1.08fr) minmax(290px,.92fr)}
+    .card,.trust-card{background:linear-gradient(180deg, rgba(255,255,255,.48), transparent 22%), var(--color-surface);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);border-radius:calc(var(--radius-xl) - .1rem);padding:var(--space-6);box-shadow:var(--shadow-sm)}
+    .card h3,.trust-card h3{font-size:var(--text-lg);margin-bottom:var(--space-3)}
+    .label{font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-faint);margin-bottom:var(--space-4);font-weight:700}
+    .number{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--color-primary-highlight);color:var(--color-primary);font-weight:800;margin-bottom:var(--space-4)}
+    .trust-card strong{display:block;font-family:var(--font-display);font-size:var(--text-xl);line-height:1.05;margin-bottom:var(--space-2)}
+    .quote-panel{display:flex;align-items:flex-end;min-height:100%;background:linear-gradient(180deg, rgba(255,255,255,.45), transparent 26%), linear-gradient(180deg, var(--color-surface-2), var(--color-surface));border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);border-radius:calc(var(--radius-xl) + .15rem);padding:var(--space-8);box-shadow:var(--shadow-md)}
+    .quote-panel p{font-size:var(--text-lg);line-height:1.45;color:var(--color-text);max-width:28ch}
+    .contact-stack{display:grid;gap:var(--space-4)}
+    .contact-item{padding:var(--space-5);background:linear-gradient(180deg, rgba(255,255,255,.45), transparent 26%), var(--color-surface);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);border-radius:var(--radius-lg)}
+    .contact-item .meta{font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-faint);margin-bottom:var(--space-2);font-weight:700}
+    .contact-item a{color:var(--color-primary);font-weight:600}
+    .footer-band{margin-top:var(--space-8);padding:var(--space-6);border-radius:var(--radius-xl);background:linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 12%, var(--color-surface)), var(--color-surface));border:1px solid color-mix(in srgb, var(--color-primary) 10%, var(--color-border))}
+    footer{padding:var(--space-8) 0 var(--space-12);border-top:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)}
+    .footer-row{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
+    .footer-links{display:flex;gap:var(--space-4);flex-wrap:wrap;color:var(--color-text-muted)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+    @media (max-width: 960px) {
+      .hero-grid,.section-head,.card-grid-2,.card-grid-3,.process-grid,.contact-grid,.principle-grid,.trust-grid{grid-template-columns:1fr}
+      .nav-links,.header-cta{display:none}
+      .hero h1{max-width:11ch}
+    }
+    @media (max-width: 640px) {
+      .nav-row{min-height:72px}
+      .actions{flex-direction:column}
+      .btn{width:100%}
+      .hero-panel,.quote-panel,.footer-band{padding:var(--space-6)}
+      .container{width:min(1180px, calc(100% - 1.25rem))}
+      .hero p{font-size:var(--text-base)}
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html{scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="#top" aria-label="DDR-Apps home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M13 10.5V37.5" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <path d="M13 10.5H22.5C31.5 10.5 37 15.9 37 24C37 32.1 31.5 37.5 22.5 37.5H13" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 18.5H22.5C27 18.5 30 20.8 30 24C30 27.2 27 29.5 22.5 29.5H20" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>DDR-Apps</strong>
+          <span>Practical mobile utilities</span>
+        </span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#services">What we build</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#principles">Principles</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a class="header-cta" href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="reveal visible">
+          <span class="eyebrow">Practical mobile utilities</span>
+          <h1>Clear mobile tools built for real use and repeat trust.</h1>
+          <p>DDR-Apps builds practical mobile utilities that help people handle everyday tasks with less friction. Downeys Diag and Repair Ltd. creates cleaner screens, faster paths, and dependable flows that help users get useful work done without unnecessary steps.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#services">See what we build</a>
+            <a class="btn btn-secondary" href="#contact">See contact details</a>
+          </div>
+        </div>
+        <aside class="hero-panel reveal visible" aria-label="Brand positioning">
+          <div class="signal">
+            <h3>Utility-first design</h3>
+            <p>Each app is shaped to support a real task quickly, clearly, and without wasted motion.</p>
+          </div>
+          <div class="signal">
+            <h3>Practical workflows</h3>
+            <p>Every screen, tap, and message is built around everyday use instead of feature clutter.</p>
+          </div>
+          <div class="signal">
+            <h3>Reliable under use</h3>
+            <p>The goal is a stable, easy-to-trust utility people can return to without relearning it.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container trust-grid reveal">
+        <article class="trust-card">
+          <strong>Clear next step</strong>
+          <p>Users should understand what to do within seconds of opening the app.</p>
+        </article>
+        <article class="trust-card">
+          <strong>Less friction</strong>
+          <p>Fewer dead ends, less clutter, and smoother movement between the steps that matter.</p>
+        </article>
+        <article class="trust-card">
+          <strong>Steady behavior</strong>
+          <p>Every utility should feel stable, calm, and dependable during repeated use.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">What we build</span>
+            <h2>Mobile utilities built for real use, no extra noise.</h2>
+          </div>
+          <p>DDR-Apps focuses on practical mobile utilities with straightforward interfaces, dependable behavior, and useful tools that solve one job clearly before adding anything extra.</p>
+        </div>
+        <div class="card-grid-2">
+          <article class="card reveal">
+            <div class="label">Core offering</div>
+            <h3>Mobile utilities designed around the user’s real task.</h3>
+            <p>The product direction centers on practical utility apps: simple interfaces, clear next steps, and functionality that stays reliable under daily use.</p>
+          </article>
+          <article class="card reveal">
+            <div class="label">Positioning</div>
+            <h3>Simple does not mean basic.</h3>
+            <p>The visual direction stays capable and polished rather than flashy, which fits a brand built around useful mobile tools for everyday people.</p>
+          </article>
+        </div>
+        <div class="card-grid-3" style="margin-top:var(--space-5)">
+          <article class="card reveal"><span class="number">01</span><h3>Intentional screens</h3><p>Each screen exists to help the user finish a task with less confusion and less delay.</p></article>
+          <article class="card reveal"><span class="number">02</span><h3>Fast understanding</h3><p>People should understand the next action within seconds of opening the app.</p></article>
+          <article class="card reveal"><span class="number">03</span><h3>Reduced friction</h3><p>Less clutter, fewer dead ends, and faster movement between the steps that matter.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Process</span>
+            <h2>A smoother path from idea to usable product.</h2>
+          </div>
+          <p>The process stays structured and focused so each utility can move from idea to usable product without losing clarity along the way.</p>
+        </div>
+        <div class="process-grid">
+          <article class="card reveal"><span class="number">1</span><h3>Define the task</h3><p>Lead with the user problem, then remove anything that slows the result down.</p></article>
+          <article class="card reveal"><span class="number">2</span><h3>Shape the flow</h3><p>Build interactions that feel smooth and predictable from screen to screen.</p></article>
+          <article class="card reveal"><span class="number">3</span><h3>Refine the details</h3><p>Polish spacing, wording, feedback, and states until the experience feels easier.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="principles">
+      <div class="container principle-grid">
+        <div class="reveal">
+          <span class="eyebrow">Principles</span>
+          <h2 style="margin-top:var(--space-4)">A visual system built for trust, clarity, and usability.</h2>
+          <p style="margin-top:var(--space-5)">The site uses a restrained silver palette, strong spacing, and compact sections so the brand feels professional, useful, and easy to trust.</p>
+          <div class="card-grid-2" style="margin-top:var(--space-6)">
+            <article class="card"><div class="label">Visual tone</div><h3>Quiet confidence</h3><p>Soft silver surfaces and a controlled teal accent keep the site clean and practical.</p></article>
+            <article class="card"><div class="label">Reading flow</div><h3>Easy to scan</h3><p>Strong headings, balanced spacing, and short paragraphs make the message easier to absorb.</p></article>
+            <article class="card"><div class="label">Product standard</div><h3>Built with purpose</h3><p>Every part of the experience is shaped to stay clear, focused, and easy to use.</p></article>
+            <article class="card"><div class="label">Brand direction</div><h3>Clear, capable, and dependable.</h3><p>The silver base and teal accent keep the brand polished, modern, and current without becoming noisy.</p></article>
+          </div>
+        </div>
+        <aside class="quote-panel reveal">
+          <p>“Practical mobile utilities built to make everyday tasks easier, faster, and clearer.”</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <span class="eyebrow">Contact</span>
+          <h2 style="margin-top:var(--space-4)">A mobile utility brand built around real use.</h2>
+        </div>
+        <div class="contact-stack reveal">
+          <div class="contact-item"><div class="meta">Email</div><div><a href="mailto:DowneysDR@gmail.com">DowneysDR@gmail.com</a></div></div>
+          <div class="contact-item"><div class="meta">Location</div><div>Red Deer, Alberta, Canada</div></div>
+          <div class="contact-item"><div class="meta">Company</div><div>DDR-Apps — Downeys Diag and Repair Ltd.</div></div>
+          <div class="contact-item"><div class="meta">Positioning line</div><div>Practical mobile utilities built to make everyday tasks easier, faster, and clearer.</div></div>
+          <div class="contact-item"><div class="meta">User focus</div><div>Every design choice supports clearer use, faster decisions, and better everyday utility.</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© 2026 Downeys Diag and Repair Ltd.</div>
+      <div class="footer-links">
+        <a href="#services">What we build</a>
+        <a href="#process">Process</a>
+        <a href="#principles">Principles</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const renderIcon = () => {
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      };
+      root.setAttribute('data-theme', theme);
+      renderIcon();
+      toggle.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        toggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+        renderIcon();
+      });
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+          });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      }
+    })();
+  </script>
+</body>
+</html>
